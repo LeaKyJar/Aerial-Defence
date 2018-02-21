@@ -25,13 +25,13 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
-		
-	}
+        enterPreparation();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        enterPreparation();
+        
 	}
 
     void endTurn ()
