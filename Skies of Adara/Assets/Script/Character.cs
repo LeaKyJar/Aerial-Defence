@@ -8,6 +8,7 @@ public class Character : MonoBehaviour, IDragHandler, IEndDragHandler
 
     [SerializeField] private float startPositionX = 0;
     [SerializeField] private float startPositionY = 0;
+    private Vector3 lastTile;
 
 
     // Use this for initialization
@@ -41,13 +42,27 @@ public class Character : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (transform.position.x>254)
+        if (transform.position.x > 254)
         {
             Vector3 startPos = new Vector3(startPositionX, startPositionY, transform.position.z);
-            transform.position=startPos;
-
+            transform.position = startPos;
+        }
+        else
+        {
+            transform.position = lastTile;
         }
     }
-    
-   
+
+    private void OnTriggerExit(Collider other)
+    {
+        //lastTile;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        //print("touchy");
+        lastTile = other.gameObject.transform.position;
+    }
+
+
+
 }

@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour {
     private bool preparationPhase = false;
     private bool atkPhase = false;
     private bool defPhase = false;
+    //public ArrayList gridInfo;
+    
+    
 
     private void Awake()
     {
