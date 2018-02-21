@@ -286,6 +286,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Character.cs" />
+    <Compile Include="Assets\Script\EnemyTile.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\GridScript.cs" />
     <Compile Include="Assets\Script\Tile.cs" />
