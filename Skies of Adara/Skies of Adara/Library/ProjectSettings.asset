@@ -635,9 +635,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: f4caf688-8e4b-4d86-8c56-aa01e03f302b
-  projectName: Skies of Adara
-  organizationId: limkenjyi
+  cloudProjectId: efd37e37-8429-46dc-bb36-898afd45be63
+  projectName: Skies of Adara (3)
+  organizationId: redfreaks95
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
