@@ -35,6 +35,7 @@ public class Bomber : Character, IPointerClickHandler
     public override void TakeDamage()
     {
         Dead = true;
+        GameObject.Find("Champion").SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData pointerEventData)

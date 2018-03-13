@@ -5,8 +5,6 @@ using UnityEngine.EventSystems;
 
 public class Champion : Character, IPointerClickHandler
 {
-
-    private bool charSelected = false;
     public static Champion instance = null;
     public GameObject atkButton;
 
@@ -46,5 +44,11 @@ public class Champion : Character, IPointerClickHandler
             atkButton.SetActive(false);
             this.CharSelected = false;
         }
+    }
+
+    public override void TakeDamage()
+    {
+        base.TakeDamage();
+        GameObject.Find("Champion").SetActive(false);
     }
 }
