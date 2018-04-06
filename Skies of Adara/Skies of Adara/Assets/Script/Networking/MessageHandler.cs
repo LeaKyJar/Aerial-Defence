@@ -4,16 +4,22 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
+using UnityEngine.UI;
 
 public static class MessageHandler 
 {
     //just a random number
     private const short chatMessage = 131;
-    public static bool loaded = false;
+    //public static bool loaded = false;
+    static bool ready = false;
+    static bool accept = false;
+    public static bool listener = false;
+    //public static String previousMessage;
 
-    
+
     // Use this for initialization
-    
+
 
     public static void Register() {
         if (NetworkServer.active)
@@ -22,6 +28,7 @@ public static class MessageHandler
             NetworkServer.RegisterHandler(chatMessage, ServerReceiveMessage);
         }
         NetworkManager.singleton.client.RegisterHandler(chatMessage, ReceiveMessage);
+        //NetworkManager.singleton.dontDestroyOnLoad = true;
     }
 
     private static void ServerReceiveMessage(NetworkMessage message)
@@ -29,27 +36,56 @@ public static class MessageHandler
         //we are using the connectionId as player name only to exemplify
         //int player = message.conn.connectionId;
         string text = message.ReadMessage<StringMessage>().value;
-        if (text == "Connected")
+        StringMessage myMessage;
+        switch (text)
         {
-            StringMessage newmessage = new StringMessage();
-            newmessage.value = "Connected";
-            NetworkServer.SendToAll(chatMessage, newmessage);
-            /*StringMessage Message = new StringMessage();
-            int firstplayer = Random.Range(0, 2);
-            Message.value = "Start";
-            NetworkServer.SendToClient(firstplayer, chatMessage, Message);
-            StringMessage Message1 = new StringMessage();
-            Message1.value = "Wait";
-            NetworkServer.SendToClient(1 - firstplayer, chatMessage, Message1);*/
-
+            case ("Connected"):
+                myMessage = new StringMessage();
+                myMessage.value = text;
+                NetworkServer.SendToAll(chatMessage, myMessage);
+                break;
+            case ("Deny"):
+                myMessage = new StringMessage();
+                myMessage.value = text;
+                NetworkServer.SendToAll(chatMessage, myMessage);
+                break;
+            case ("Ready"):
+                if (!ready)
+                {
+                    ready = true;
+                }
+                else
+                {
+                    StringMessage Message = new StringMessage();
+                    int firstplayer = UnityEngine.Random.Range(0, 2);
+                    Message.value = "First";
+                    NetworkServer.SendToClient(firstplayer, chatMessage, Message);
+                    StringMessage Message1 = new StringMessage();
+                    Message1.value = "Second";
+                    NetworkServer.SendToClient(1 - firstplayer, chatMessage, Message1);
+                }
+                break;
+            case ("Accept"):
+                if (!accept)
+                {
+                    accept = true;
+                }
+                else
+                {
+                    myMessage = new StringMessage();
+                    myMessage.value = "Start";
+                    NetworkServer.SendToAll(chatMessage, myMessage);
+                    break;
+                }
+                break;
+            default:
+                int sender = message.conn.connectionId;
+                myMessage = new StringMessage();
+                myMessage.value = text;
+                NetworkServer.SendToClient(1 - sender, chatMessage, myMessage);
+                break;
         }
-        //sending to all connected clients
-        else
-        {
-            StringMessage myMessage = new StringMessage();
-            myMessage.value = text;
-            NetworkServer.SendToAll(chatMessage, myMessage);
-        }
+        
     }
 
     private static void ReceiveMessage(NetworkMessage message)
@@ -61,22 +97,57 @@ public static class MessageHandler
         //Inserts switch statement for gamestate
         switch (text)
         {
-            case ("Connected"):                
-                SceneManager.LoadScene("Scenes/BattleScene");
+            case ("Connected"):
+                //SceneManager.LoadScene("Scenes/BattleScene");
+                CustomNetworkManager.instance.inmatchmaking = false;
+                CustomNetworkManager.instance.changeScene();
+                CustomNetworkManager.instance.waitingrequests = true;
+                CustomNetworkManager.instance.expiry = Time.time + 10f;
                 break;
+
             case ("Start"):
-                GameManager.instance.StartFirst = true;
+                CustomNetworkManager.instance.waitingrequests = false;
+                CustomNetworkManager.instance.startGame();
                 break;
-            case ("Wait"):
+
+            case ("Deny"):
+                CustomNetworkManager.instance.cancelrequest();
+                break;
+            case ("First"):
+                GameManager.instance.StartFirst = true;
+                GameManager.instance.ExitPreparation();
+                break;
+            case ("Second"):
                 GameManager.instance.StartFirst = false;
+                GameManager.instance.ExitPreparation();
+                break;
+            case ("YourTurn"):
+                GameManager.instance.StartTurn();
+                break;
+            case ("Victory"):
+                GameManager.instance.WinGame();
+                CustomNetworkManager.instance.StopMatchMaking();
+                break;
+            case("Hit Received"):
+                Debug.Log("Previous Message");
+                GameManager.instance.EmptyEnemyTile();
                 break;
             default:
-                GameManager.instance.TileHit(text);
+                //Your tile that enemy has hit
+                Debug.Log(text);
+                if (Int32.Parse(text) >= 100) {
+                    GameManager.instance.TileHit(text);
+                }
+                //You have a valid hit on the enemy
+                else
+                {
+                    GameManager.instance.HitAlert(text);
+                }
                 break;
+                
 
         }
 
-        
     }
 
     public static void SendStringMessage(string input)
@@ -86,6 +157,10 @@ public static class MessageHandler
 
         //sending to server
         Debug.Log("SendStringMessage");
+        Debug.Log(input);
         NetworkManager.singleton.client.Send(chatMessage, myMessage);
+
+        //previousMessage = input;
     }
+
 }

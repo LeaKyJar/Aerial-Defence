@@ -39,10 +39,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 0}
+  enemyTilePrefab: {fileID: 0}
   numberOfTiles_x: 5
   numberOfTiles_y: 5
-  distanceBetweenTiles: 48
-  canvas: {fileID: 0}
+  distanceBetweenTiles: 90
+  canvasPrefab: {fileID: 0}
 --- !u!224 &224754020502114976
 RectTransform:
   m_ObjectHideFlags: 1

@@ -6,21 +6,79 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.Types;
 using UnityEngine.Networking.Match;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class CustomNetworkManager : NetworkManager
-{
+public class CustomNetworkManager : NetworkManager{
+
+    private float RefreshTime;
+    public volatile bool inmatchmaking = false;
+    public volatile bool waitingrequests = false;
     private const short chatMessage = 131;
+
+    //iniT
+    public static CustomNetworkManager instance = null;
+    public float expiry;
+
+    [SerializeField]private GameObject matchfound; //set matchfound in hierarchy
+    [SerializeField]private GameObject matchmaking; //set matchmaking
+    [SerializeField]private Button acceptMatch;
+    [SerializeField]private Button cancelMatch;
+    [SerializeField]private GameObject mainMenu; //set mainmenu
+
+    void Start()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    IEnumerator Refresher()
+    {
+        StopMatchMaking();
+        yield return new WaitForSeconds(2);
+        StartHosting();
+        RefreshTime = Time.time + 10f;
+    }
+
+    private void Update()
+    {
+        if (inmatchmaking)
+        { 
+            if (Time.time >= RefreshTime)
+            {
+                StartCoroutine(Refresher());
+            }
+        }
+        if (waitingrequests)
+        {
+            if (Time.time >= expiry)
+            {
+                cancelrequest();
+            }
+        }
+    }
 
     public void StartHosting()
     {
         StartMatchMaker();
         matchMaker.ListMatches(0, 10, "", true, 0, 0, HandleListMatchesComplete);
+        inmatchmaking = true;
+        RefreshTime = Time.time + 10f;
     }
 
 	private void OnMatchCreated(bool success, string extendedinfo, MatchInfo responsedata)
 	{
         StartHost(responsedata);
-        MessageHandler.Register();
+        if (!MessageHandler.listener)
+        { 
+            MessageHandler.Register();
+            MessageHandler.listener = true;
+        }
     }   
 
     private void HandleListMatchesComplete(bool success, 
@@ -41,15 +99,22 @@ public class CustomNetworkManager : NetworkManager
 
 	private void HandleJoinedMatch(bool success, string extendedinfo, MatchInfo responsedata)
 	{
-
         StartClient(responsedata);
-        MessageHandler.Register();
+        if (!MessageHandler.listener)
+        {
+            MessageHandler.Register();
+            MessageHandler.listener = true;
+        }
     }
 
     
 
-    public void StopMatchMaking() {
+    public void StopMatchMaking()
+    {
+        inmatchmaking = false;
         StopHost();
+        StopClient();
+        MessageHandler.listener = false;
     }
 
     public override void OnServerConnect(NetworkConnection Conn)
@@ -61,5 +126,48 @@ public class CustomNetworkManager : NetworkManager
         }
     }
 
-    
+    public void changeScene()
+    {
+       // matchfound = this.gameObject.GetComponent<GameObject>();
+        //matchmaking = this.GetComponent<GameObject>();
+        //acceptMatch = this.GetComponent<Button>();
+        //cancelMatch = this.GetComponent<Button>();
+
+        matchfound.SetActive(true);
+        matchmaking.SetActive(false);
+
+        if (matchfound.activeSelf == true)
+        {
+            acceptMatch.gameObject.SetActive(true);
+            cancelMatch.gameObject.SetActive(true);
+            acceptMatch.onClick.AddListener(acceptmatch);
+            cancelMatch.onClick.AddListener(cancelGame);
+        }
+    }
+
+    public void acceptmatch()
+    {
+        acceptMatch.gameObject.SetActive(false);
+        cancelMatch.gameObject.SetActive(false);
+        MessageHandler.SendStringMessage("Accept");
+    }
+
+    public void startGame()
+    {
+        SceneManager.LoadScene("Scenes/BattleScene");
+    }
+
+    public void cancelGame()
+    {
+        MessageHandler.SendStringMessage("Deny");
+    }
+
+    public void cancelrequest()
+    {
+        matchfound.SetActive(false);
+        mainMenu.SetActive(true);
+        waitingrequests = false;
+        StopMatchMaking();
+    }
+
 }

@@ -9,21 +9,22 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1166792216764570}
+  m_RootGameObject: {fileID: 1242963757683084}
   m_IsPrefabParent: 1
---- !u!1 &1166792216764570
+--- !u!1 &1242963757683084
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224445647815866194}
-  - component: {fileID: 222511293961105738}
-  - component: {fileID: 114996777877571594}
-  - component: {fileID: 65714018546444772}
-  - component: {fileID: 54421976371942668}
-  - component: {fileID: 114198446689392268}
+  - component: {fileID: 224079198091870762}
+  - component: {fileID: 222458390368405674}
+  - component: {fileID: 114258730824166654}
+  - component: {fileID: 65352223160378244}
+  - component: {fileID: 54424768480217240}
+  - component: {fileID: 114995220578478494}
+  - component: {fileID: 111244504273444906}
   m_Layer: 5
   m_Name: Tile
   m_TagString: Untagged
@@ -31,12 +32,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!54 &54421976371942668
+--- !u!54 &54424768480217240
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1166792216764570}
+  m_GameObject: {fileID: 1242963757683084}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -46,35 +47,39 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65714018546444772
+--- !u!65 &65352223160378244
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1166792216764570}
+  m_GameObject: {fileID: 1242963757683084}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 30, y: 30, z: 1}
+  m_Size: {x: 65, y: 65, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114198446689392268
-MonoBehaviour:
+--- !u!111 &111244504273444906
+Animation:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1166792216764570}
+  m_GameObject: {fileID: 1242963757683084}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08648a2a9bf53344fab7b89542557314, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114996777877571594
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 6ee93a562e0579342b3ec1b384e12c08, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 6ee93a562e0579342b3ec1b384e12c08, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &114258730824166654
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1166792216764570}
+  m_GameObject: {fileID: 1242963757683084}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -98529514, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -88,25 +93,39 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: e64225e665b291f4da230acaf51cda75, type: 3}
+  m_Texture: {fileID: 2800000, guid: 75aefc06fc2771d4a82b93a42032c11f, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
---- !u!222 &222511293961105738
+--- !u!114 &114995220578478494
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1242963757683084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08648a2a9bf53344fab7b89542557314, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalTile: {fileID: 2800000, guid: 75aefc06fc2771d4a82b93a42032c11f, type: 3}
+  selectedTile: {fileID: 2800000, guid: 6e749470d0011eb45974a9cc52b98242, type: 3}
+  brokenTile: {fileID: 2800000, guid: b9518f4caa328fe489a136111d862885, type: 3}
+--- !u!222 &222458390368405674
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1166792216764570}
---- !u!224 &224445647815866194
+  m_GameObject: {fileID: 1242963757683084}
+--- !u!224 &224079198091870762
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1166792216764570}
+  m_GameObject: {fileID: 1242963757683084}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -116,6 +135,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 0, y: -108}
+  m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
