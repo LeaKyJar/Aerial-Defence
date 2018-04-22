@@ -179,7 +179,7 @@ public class NewPlayModeTest
         Clickalltiles();
         pi.gameObject.SetActive(true);
         pi.IndicatePhaseCoroutine("Engineer Body Deployed");
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(1);
     }
     [UnityTest]
     public IEnumerator Test5_1SnaptoDefaultBomber()
@@ -225,40 +225,50 @@ public class NewPlayModeTest
     }
 
     [UnityTest]
-    public IEnumerator Test6_1StartGameasSecond()
+    public IEnumerator Test6_1StartGameasFirst()
     {
-        GameManager.instance.StartFirst = false;
+        GameManager.instance.StartFirst = true;
         GameManager.instance.ExitPreparation();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(5);
     }
 
     [UnityTest]
     public IEnumerator Test6_2DefenderShieldHit()
     {
-        try
-        {
-            GameManager.instance.TileHit("100");
-        }
-        catch (System.Exception e) { }
-
-        pi.gameObject.SetActive(true);
-        pi.IndicatePhaseCoroutine("Attack on Defender's shield has completed.");
-        yield return new WaitForSeconds(1);
-    }
-
-    [UnityTest]
-    public IEnumerator Test6_3EnemyFeedbackTile0()
-    {
-        try
-        {
-            GameManager.instance.HitAlert("0");
-            GameManager.instance.GridToggle();
-            pi.gameObject.SetActive(true);
-            pi.IndicatePhaseCoroutine("Feedback from enemy has completed.");
-        }
-        catch (System.Exception e) { }
+        GameManager.instance.TileHit("100");
+        //pi.gameObject.SetActive(true);
+        //pi.IndicatePhaseCoroutine("Attack on Defender's shield has completed.");
         yield return new WaitForSeconds(10);
     }
+
+    //[UnityTest]
+    //public IEnumerator Test6_3EnemyFeedbackTile0()
+    //{
+    //    Champion.instance.OnPointerClick(new PointerEventData(EventSystem.current));
+    //    yield return new WaitForSeconds(5);
+    //    GameObject.Find("100").GetComponent<EnemyTile>().OnPointerClick(new PointerEventData(EventSystem.current));
+    //    GameManager.instance.HitAlert("0");
+    //    pi.gameObject.SetActive(true);
+    //    pi.IndicatePhaseCoroutine("Hit from enemy has completed.");
+    //    yield return new WaitForSeconds(1);
+    //}
+
+    //[UnityTest]
+    //public IEnumerator Test6_4EnemyFeedbackTile4()
+    //{
+
+    //    Bomber.instance.OnPointerClick(new PointerEventData(EventSystem.current));
+    //    yield return new WaitForSeconds(5);
+    //    GameObject.Find("104").GetComponent<EnemyTile>().OnPointerClick(new PointerEventData(EventSystem.current));
+    //    yield return new WaitForSeconds(0.5f);
+    //    GameManager.instance.EmptyEnemyTile();
+    //    yield return new WaitForSeconds(2);
+    //    pi.gameObject.SetActive(true);
+    //    pi.IndicatePhaseCoroutine("Miss from enemy has completed.");
+    //    GameManager.instance.GridToggle();
+        
+    //    yield return new WaitForSeconds(10);
+    //}
     //[UnityTest]
     //public IEnumerator TestStartingTurn()
     //{

@@ -95,6 +95,10 @@ public class Defender : Character, IPointerClickHandler
     {
         print("reaches InstantiateShield()");
         DefDeployed = true;
+        if (GameManager.instance.PreparationPhase)
+        {
+            GameManager.instance.DefenderToEngineer();
+        }
 
         //instantiates Shield
         GameObject shieldPrefab = Resources.Load("Shield") as GameObject;
@@ -124,6 +128,10 @@ public class Defender : Character, IPointerClickHandler
             base.OnPointerClick(pointerEventData);
         }
             
+    }
+    public override void Healed() {
+        base.Healed();
+        MessageHandler.turn.Add("H:Defender:" + this.LastTileID);
     }
 
 }

@@ -7,6 +7,15 @@ using UnityEngine.UI;
 
 public class Character : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDragHandler
 {
+
+    public GameObject Ship;
+    private GameObject activeIndicator;
+    public GameObject ActiveIndicator
+    {
+        get { return activeIndicator; }
+        set { activeIndicator = value; }
+    }
+
     private bool bodyDeployed = false;
     public bool BodyDeployed
     {
@@ -79,16 +88,19 @@ public class Character : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDra
     public Texture DeadImage
     {
         get { return deadImage; }
+        set { deadImage = value; }
     }
     [SerializeField] private Texture liveImage;
     public Texture LiveImage
     {
         get { return liveImage; }
+        set { liveImage = value; }
     }
     [SerializeField] private Texture healImage;
     public Texture HealImage
     {
         get { return healImage; }
+        set { healImage = value; }
     }
     private bool active = false;
     public bool Active
@@ -181,7 +193,7 @@ public class Character : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDra
         //Prevents Characters and occupied Tiles instead of empty Tiles from being selected
         try
         {
-            if (!other.gameObject.GetComponent<Character>() && !other.gameObject.GetComponent<Tile>().Occupied)
+            if (!other.gameObject.GetComponent<EnemyTile>() && !other.gameObject.GetComponent<Character>() && !other.gameObject.GetComponent<Tile>().Occupied)
             {
                 lastTileObject = other.gameObject;
                 lastTile = lastTileObject.transform.position;
@@ -201,8 +213,7 @@ public class Character : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDra
     {
         try
         {
-
-            if (!other.gameObject.GetComponent<Character>() && !other.gameObject.GetComponent<Tile>().Occupied && !BeingDragged)
+            if (!other.gameObject.GetComponent<EnemyTile>() && !other.gameObject.GetComponent<Character>() && !other.gameObject.GetComponent<Tile>().Occupied && !BeingDragged)
             {
                 other.gameObject.GetComponent<Tile>().Occupied = true;
             }
@@ -214,7 +225,7 @@ public class Character : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDra
 
     public virtual void OnTriggerExit(Collider other)
     {
-        if (!other.gameObject.GetComponent<Character>())
+        if (!other.gameObject.GetComponent<Character>() && !other.gameObject.GetComponent<EnemyTile>())
         {
             other.gameObject.GetComponent<Tile>().Occupied = false;
         }
@@ -223,10 +234,19 @@ public class Character : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDra
 
     public virtual void TakeDamage()
     {
-        
-        dead = true;
-        this.gameObject.GetComponent<RawImage>().texture = deadImage;
-        MessageHandler.SendStringMessage(LastTileName);
+        if (!dead)
+        {
+            dead = true;
+            this.gameObject.GetComponent<RawImage>().texture = deadImage;
+            MessageHandler.SendStringMessage(LastTileName);
+            GameManager.instance.instructions.SetActive(false);
+            GameManager.instance.FireMissile(Ship.transform.position);
+            Ship.GetComponent<Ship>().Destroyed();
+        }
+        else
+        {
+            MessageHandler.SendStringMessage("Hit Received");
+        }
         
     }
     
@@ -246,6 +266,7 @@ public class Character : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDra
         this.gameObject.GetComponent<RawImage>().texture = this.gameObject.GetComponent<Character>().LiveImage;
         this.gameObject.GetComponent<Animation>().Stop();
         this.gameObject.GetComponent<RawImage>().color = new Vector4(200 / 255f, 200 / 255f, 200 / 255f, 1f);
+        Ship.SetActive(true);
     }
     
     public virtual void OnPointerClick(PointerEventData pointerEventData)
@@ -257,7 +278,8 @@ public class Character : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDra
             Healed();
             Engineer.instance.OnDeselectChar();
             Engineer.instance.GetComponentInChildren<Body>().OnDeselectChar();
-            Engineer.instance.Active = false;
+            Engineer.instance.MakeInactive();
+            Engineer.instance.GetComponentInChildren<Body>().MakeInactive();
             Engineer.instance.Heal -= 1;
             print(Engineer.instance.Heal);
             Character[] charArray = { Champion.instance, Defender.instance, Bomber.instance, Engineer.instance,
@@ -271,11 +293,14 @@ public class Character : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDra
                     character.gameObject.GetComponent<RawImage>().texture = character.gameObject.GetComponent<Character>().deadImage;
                 }
             }
+            if (!Champion.instance.Active && !Bomber.instance.Active && !Engineer.instance.Active)
+            {
+                GameManager.instance.EndTurn();
+            }
         }
         else if (GameManager.instance.PreparationPhase && GameManager.instance.DefenderPreparationPhase && !Defender.instance.DefDeployed && Defender.instance.BodyDeployed)
         {
             Defender.instance.InstantiateShield(lastTile, lastTileName);
-            GameManager.instance.DefenderToEngineer();
         }
     }
     
@@ -305,6 +330,7 @@ public class Character : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDra
         {
             this.gameObject.GetComponent<Animation>().Play();
             CharSelected = true;
+            activeIndicator.GetComponent<CharacterActiveIndicator>().DisableIndicators();
         }
         
     }
@@ -313,6 +339,45 @@ public class Character : MonoBehaviour, IDragHandler, IEndDragHandler, IBeginDra
     {
         this.gameObject.GetComponent<Animation>().Stop();
         this.gameObject.GetComponent<RawImage>().color = new Vector4 (200/255f, 200/255f, 200/255f,1f);
+        try
+        {
+            activeIndicator.GetComponent<CharacterActiveIndicator>().EnableIndicators();
+        } catch(Exception ex)
+        {
+            Debug.Log(ex);
+        }
         CharSelected = false;
+    }
+
+    public virtual void MakeActive()
+    {
+        active = true;
+        InstantiateActiveIndicator();
+    }
+
+    public virtual void MakeInactive()
+    {
+        active = false;
+        DestroyActiveIndicator();
+    }
+
+    public void InstantiateActiveIndicator()
+    {
+
+        //instantiates ActiveIndicator
+        GameObject indicator = Resources.Load("CharacterActiveIndicator") as GameObject;
+        activeIndicator = Instantiate(indicator, lastTile, transform.rotation);
+        activeIndicator.transform.SetParent(this.gameObject.GetComponentInParent<Canvas>().transform, false);
+        activeIndicator.transform.SetSiblingIndex(15);
+
+        activeIndicator.transform.position = lastTile;
+        activeIndicator.GetComponent<CharacterActiveIndicator>().ActiveCharacter = this.gameObject;
+        
+    }
+
+    public void DestroyActiveIndicator()
+    {
+        Destroy(activeIndicator);
+        Debug.Log("Active Indicator Destroyed");
     }
 }

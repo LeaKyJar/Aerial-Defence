@@ -24,8 +24,9 @@ public class CustomNetworkManager : NetworkManager{
     [SerializeField]private Button acceptMatch;
     [SerializeField]private Button cancelMatch;
     [SerializeField]private GameObject mainMenu; //set mainmenu
+    public GameObject dcbutton;
 
-    void Start()
+    void Awake()
     {
         if (instance == null)
         {
@@ -33,8 +34,10 @@ public class CustomNetworkManager : NetworkManager{
         }
         else if (instance != this)
         {
-            Destroy(gameObject);
+            Destroy(instance);
+            instance = this;
         }
+        DontDestroyOnLoad(gameObject);
     }
 
     IEnumerator Refresher()
@@ -58,6 +61,7 @@ public class CustomNetworkManager : NetworkManager{
         {
             if (Time.time >= expiry)
             {
+
                 cancelrequest();
             }
         }
@@ -113,7 +117,6 @@ public class CustomNetworkManager : NetworkManager{
     {
         inmatchmaking = false;
         StopHost();
-        StopClient();
         MessageHandler.listener = false;
     }
 
@@ -140,15 +143,12 @@ public class CustomNetworkManager : NetworkManager{
         {
             acceptMatch.gameObject.SetActive(true);
             cancelMatch.gameObject.SetActive(true);
-            acceptMatch.onClick.AddListener(acceptmatch);
-            cancelMatch.onClick.AddListener(cancelGame);
         }
     }
 
     public void acceptmatch()
     {
-        acceptMatch.gameObject.SetActive(false);
-        cancelMatch.gameObject.SetActive(false);
+        disablebuttons();
         MessageHandler.SendStringMessage("Accept");
     }
 
@@ -167,7 +167,38 @@ public class CustomNetworkManager : NetworkManager{
         matchfound.SetActive(false);
         mainMenu.SetActive(true);
         waitingrequests = false;
+        MessageHandler.accept = false;
         StopMatchMaking();
     }
 
+    public void disablebuttons() {
+        acceptMatch.gameObject.SetActive(false);
+        cancelMatch.gameObject.SetActive(false);
+    }
+
+    public override void OnServerDisconnect(NetworkConnection connection)
+    {
+        //StringMessage myMessage = new StringMessage();
+        //myMessage.value = "Disconnected";
+        //NetworkServer.SendToAll(chatMessage, myMessage);
+        if (MessageHandler.halfway)
+        {
+            StopHost();
+            waitingrequests = false;
+            SceneManager.LoadScene("Scenes/Menu");
+            dcbutton.SetActive(true);
+
+        }
+
+    }
+
+    public override void OnClientDisconnect(NetworkConnection connection)
+    {
+        if (MessageHandler.halfway)
+        {
+            waitingrequests = false;
+            SceneManager.LoadScene("Scenes/Menu");
+            dcbutton.SetActive(true);
+        }
+    }
 }

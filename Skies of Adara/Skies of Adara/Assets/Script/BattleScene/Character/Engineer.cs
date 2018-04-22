@@ -8,23 +8,6 @@ public class Engineer : Character, IPointerClickHandler
 {
 
     public static Engineer instance = null;
-    /*
-    [SerializeField] private Texture deadImage;
-    public Texture DeadImage
-    {
-        get { return deadImage; }
-    }
-    [SerializeField] private Texture liveImage;
-    public Texture LiveImage
-    {
-        get { return liveImage; }
-    }
-    [SerializeField] private Texture healImage;
-    public Texture HealImage
-    {
-        get { return healImage; }
-    }
-    */
     private Vector3 priorPos;
     private int heal = 1;
     public int Heal
@@ -104,6 +87,7 @@ public class Engineer : Character, IPointerClickHandler
                     character.gameObject.GetComponent<Character>().OnDeselectChar();
                 }
             }
+            GameManager.instance.EnableActiveIndicators();
         }
     }
 
@@ -114,16 +98,9 @@ public class Engineer : Character, IPointerClickHandler
         Debug.Log(BodyDeployed);
         if (!BodyDeployed && LastTileObject != null)
         {
-            
-            /*Defender.instance.gameObject.SetActive(false);
-            Bomber.instance.gameObject.SetActive(false);
-            Champion.instance.gameObject.SetActive(false);
-            if (Defender.instance.DefDeployed)
-            {
-                GameManager.instance.shield.SetActive(false);
-            }*/
             this.DeployExtraBody = true;
             LightSurroundingTiles();
+            GameManager.instance.SetInstructions("Touch any of the glowing tiles to deploy the Engineer's Body!");
         }
         if (this.gameObject.GetComponentInChildren<Body>() != null)
         {
@@ -228,6 +205,16 @@ public class Engineer : Character, IPointerClickHandler
             GameObject.Find(rightTile.ToString()).GetComponent<Tile>().StopLightUp();
         }
     }
-    
-    
+
+    public override void MakeInactive()
+    {
+        this.gameObject.GetComponentInChildren<Body>().MakeInactive();
+        base.MakeInactive();
+    }
+
+    public override void Healed()
+    {
+        base.Healed();
+        MessageHandler.turn.Add("H:Engineer:" + this.LastTileID);
+    }
 }

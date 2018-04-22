@@ -111,7 +111,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
                     
                     
                     //ReactivateUnits();
-                    GameManager.instance.DefenderToEngineer();
+                    //GameManager.instance.DefenderToEngineer();
                 }
 
                 //ReactivateUnits();

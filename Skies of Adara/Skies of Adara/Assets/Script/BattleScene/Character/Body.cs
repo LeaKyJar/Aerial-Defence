@@ -23,17 +23,65 @@ public class Body : Character, IPointerClickHandler {
         get { return healImage; }
     }
     */
+
+    [SerializeField] private Texture deadChampionImage;
+    public Texture DeadChampionImage
+    {
+        get { return deadChampionImage; }
+    }
+    [SerializeField] private Texture liveChampionImage;
+    public Texture LiveChampionImage
+    {
+        get { return liveChampionImage; }
+    }
+    [SerializeField] private Texture healChampionImage;
+    public Texture HealChampionImage
+    {
+        get { return healChampionImage; }
+    }
+
+    [SerializeField] private Texture deadEngineerImage;
+    public Texture DeadEngineerImage
+    {
+        get { return deadEngineerImage; }
+    }
+    [SerializeField] private Texture liveEngineerImage;
+    public Texture LiveEngineerImage
+    {
+        get { return liveEngineerImage; }
+    }
+    [SerializeField] private Texture healEngineerImage;
+    public Texture HealEngineerImage
+    {
+        get { return healEngineerImage; }
+    }
+    void Awake()
+    {
+        
+    }
+
     // Use this for initialization
     void Start () {
         Vector3 startPos = new Vector3(StartPositionX, StartPositionY, transform.position.z);
         transform.position = startPos;
         Scaler = this.gameObject.GetComponentInParent<CanvasScaler>();
         BodyDeployed = true;
-        /*if (GameManager.instance.PreparationPhase && Champion.instance.BodyDeployed && Engineer.instance.BodyDeployed && Bomber.instance.BodyDeployed && Defender.instance.BodyDeployed)
+        if (this.gameObject.name == "ChampionBody")
         {
-            GameManager.instance.ready.GetComponent<Button>().interactable = true;
-            GameManager.instance.SetInstructions("Click the Ready! button when your're done!");
-        }*/
+            DeadImage = DeadChampionImage;
+            HealImage = HealChampionImage;
+            LiveImage = LiveChampionImage;
+            this.Ship = Champion.instance.Ship;
+        }
+        if (this.gameObject.name == "EngineerBody")
+        {
+            Debug.Log("engineerBodyImage loaded");
+            DeadImage = DeadEngineerImage;
+            HealImage = HealEngineerImage;
+            LiveImage = LiveEngineerImage;
+            this.Ship = Engineer.instance.Ship;
+        }
+        this.gameObject.GetComponent<RawImage>().texture = LiveImage;
         StopLightingSurroundingTiles();
     }
 
@@ -57,13 +105,21 @@ public class Body : Character, IPointerClickHandler {
 
     public override void OnPointerClick(PointerEventData eventData)
     {
-        if (Engineer.instance.CharSelected)
-        {
-            base.OnPointerClick(eventData);
-        }
-        else if (CharSelected)
+        base.OnPointerClick(eventData);
+        if (CharSelected)
         {
             OnDeselectChar();
+            Character[] charArray = { Champion.instance, Defender.instance, Bomber.instance, Engineer.instance,
+                GameObject.Find("ChampionBody").GetComponent<Body>(), GameObject.Find("EngineerBody").GetComponent<Body>()};
+            foreach (Character character in charArray)
+            {
+                if (character.Dead)
+                {
+                    character.gameObject.GetComponent<RawImage>().texture = character.gameObject.GetComponent<Character>().DeadImage;
+                    character.gameObject.GetComponent<Character>().OnDeselectChar();
+                }
+            }
+            GameManager.instance.EnableActiveIndicators();
         }
         else
         {
@@ -105,7 +161,7 @@ public class Body : Character, IPointerClickHandler {
 
     public override void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.GetComponent<Character>())
+        if (!other.gameObject.GetComponent<Character>() && !other.gameObject.GetComponent<EnemyTile>())
         {
             print("Object Set: " + other.gameObject.name);
             LastTileObject = other.gameObject;

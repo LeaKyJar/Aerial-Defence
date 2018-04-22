@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "447550926116",
+    "firebase_url": "https://aerialdeffiredb.firebaseio.com",
+    "project_id": "aerialdeffiredb",
+    "storage_bucket": "aerialdeffiredb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447550926116:android:a63dd9e91a876511",
+        "android_client_info": {
+          "package_name": "com.ESC.Battleships"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447550926116-8ar94bd4ltrr40nkqq9nt8an1301r6um.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzsCKgHf0orKedcrMGBow_lvodYXB6g0w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

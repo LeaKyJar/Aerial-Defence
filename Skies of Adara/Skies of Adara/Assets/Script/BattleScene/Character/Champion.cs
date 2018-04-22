@@ -61,15 +61,9 @@ public class Champion : Character, IPointerClickHandler
     {
         if (GameManager.instance.AtkPhase && !this.CharSelected && this.Active)
         {
-            //atkButton.SetActive(true);
             GameManager.instance.GridToggle();
             OnSelectChar();
         }
-        /*else if (GameManager.instance.AtkPhase && this.CharSelected)
-        {
-            atkButton.SetActive(false);
-            //OnDeselectChar();
-        }*/
     }
 
     public override void TakeDamage()
@@ -93,15 +87,9 @@ public class Champion : Character, IPointerClickHandler
         base.OnEndDrag(eventData);
         if (!BodyDeployed && LastTileObject != null)
         {
-            /*Defender.instance.gameObject.SetActive(false);
-            Bomber.instance.gameObject.SetActive(false);
-            Engineer.instance.gameObject.SetActive(false);
-            if (Defender.instance.DefDeployed)
-            {
-                GameManager.instance.shield.SetActive(false);
-            }*/
             this.DeployExtraBody = true;
             LightSurroundingTiles();
+            GameManager.instance.SetInstructions("Touch any of the glowing tiles to deploy the Champion's Body!");
         }
         if (this.gameObject.GetComponentInChildren<Body>() != null)
         {
@@ -208,5 +196,17 @@ public class Champion : Character, IPointerClickHandler
     {
         base.OnTriggerEnter(other);
     }
-    
+
+    public override void MakeInactive()
+    {
+        this.gameObject.GetComponentInChildren<Body>().MakeInactive();
+        base.MakeInactive();
+    }
+
+    public override void Healed()
+    {
+        base.Healed();
+        MessageHandler.turn.Add("H:Champion:" + this.LastTileID);
+    }
+
 }

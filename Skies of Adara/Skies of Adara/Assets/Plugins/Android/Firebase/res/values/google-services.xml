@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id" xmlns:tools="http://schemas.android.com/tools">
+  <string name="firebase_database_url" translatable="false">https://aerialdeffiredb.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">447550926116</string>
+  <string name="google_storage_bucket" translatable="false">aerialdeffiredb.appspot.com</string>
+  <string name="project_id" translatable="false">aerialdeffiredb</string>
+  <string name="google_api_key" translatable="false">AIzaSyCzsCKgHf0orKedcrMGBow_lvodYXB6g0w</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCzsCKgHf0orKedcrMGBow_lvodYXB6g0w</string>
+  <string name="google_app_id" translatable="false">1:447550926116:android:a63dd9e91a876511</string>
+  <string name="default_web_client_id" translatable="false">447550926116-8ar94bd4ltrr40nkqq9nt8an1301r6um.apps.googleusercontent.com</string>
+</resources>

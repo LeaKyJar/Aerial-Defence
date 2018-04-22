@@ -9,23 +9,6 @@ public class Bomber : Character, IPointerClickHandler
 {
     public GameObject atkButton;
     public static Bomber instance = null;
-    /*
-    [SerializeField] private Texture deadImage;
-    public Texture DeadImage
-    {
-        get { return deadImage; }
-    }
-    [SerializeField] private Texture liveImage;
-    public Texture LiveImage
-    {
-        get { return liveImage; }
-    }
-    [SerializeField] private Texture healImage;
-    public Texture HealImage
-    {
-        get { return healImage; }
-    }
-    */
     private void Awake()
     {
         if (instance == null)
@@ -51,15 +34,18 @@ public class Bomber : Character, IPointerClickHandler
 
     public override void TakeDamage()
     {
-        int correspondingEnemyTile = Int32.Parse(LastTileName)+100;
-        string correspondingEnemyTileName = correspondingEnemyTile.ToString();
-        GameManager.instance.enemyGrid.SetActive(true);
-        GameObject kamikazeTargetTile = GameObject.Find(correspondingEnemyTileName);
-        if (!kamikazeTargetTile.GetComponent<EnemyTile>().TileDestroyed)
+        if (!Dead)
         {
-            GameManager.instance.EnemyTargeted(correspondingEnemyTile.ToString());
+            int correspondingEnemyTile = Int32.Parse(LastTileName) + 100;
+            string correspondingEnemyTileName = correspondingEnemyTile.ToString();
+            GameManager.instance.enemyGrid.SetActive(true);
+            GameObject kamikazeTargetTile = GameObject.Find(correspondingEnemyTileName);
+            if (!kamikazeTargetTile.GetComponent<EnemyTile>().TileDestroyed)
+            {
+                GameManager.instance.EnemyTargeted(correspondingEnemyTile.ToString());
+            }
+            GameManager.instance.enemyGrid.SetActive(false);
         }
-        GameManager.instance.enemyGrid.SetActive(false);
 
         base.TakeDamage();
     }
@@ -97,9 +83,10 @@ public class Bomber : Character, IPointerClickHandler
 
     public override void OnEndDrag(PointerEventData eventData)
     {
-        if (GameManager.instance.PreparationPhase)
+
+        base.OnEndDrag(eventData);
+        if (GameManager.instance.PreparationPhase && LastTileObject != null)
         {
-            base.OnEndDrag(eventData);
             BodyDeployed = true;
             GameManager.instance.BombertoReady();
         }
@@ -108,6 +95,12 @@ public class Bomber : Character, IPointerClickHandler
     public override void OnBeginDrag(PointerEventData eventData)
     {
         base.OnBeginDrag(eventData);
+    }
+
+    public override void Healed()
+    {
+        base.Healed();
+        MessageHandler.turn.Add("H:Bomber:" + this.LastTileID);
     }
 }
 

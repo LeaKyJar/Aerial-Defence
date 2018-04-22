@@ -8,7 +8,7 @@ public class EnemyTile : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Texture enemyIndicator;
     [SerializeField] private Texture destroyedTileIndicator;
-    private Texture originalEnemyTile;
+    private Texture originalEnemyTile; 
     private bool tileDestroyed = false;
     public bool TileDestroyed
     {
@@ -31,17 +31,20 @@ public class EnemyTile : MonoBehaviour, IPointerClickHandler
     {
         print(this.gameObject.transform.position.x + ", " + this.gameObject.transform.position.y);
         if (Bomber.instance.Active && Bomber.instance.CharSelected) {
-            
-            Bomber.instance.Active = false;
+            GameManager.instance.instructions.SetActive(false);
+            Bomber.instance.Ship.GetComponent<Ship>().FireMissile();
+            Bomber.instance.MakeInactive();
             Bomber.instance.OnDeselectChar();
             AttackTile();
         }
         else if (Champion.instance.Active && Champion.instance.CharSelected ||
             Champion.instance.GetComponentInChildren<Body>().Active && Champion.instance.GetComponentInChildren<Body>().CharSelected)
         {
-            Champion.instance.Active = false;
+            GameManager.instance.instructions.SetActive(false);
+            Champion.instance.Ship.GetComponent<Ship>().FireMissile();
+            Champion.instance.MakeInactive();
             Champion.instance.OnDeselectChar();
-            Champion.instance.GetComponentInChildren<Body>().Active = false;
+            Champion.instance.GetComponentInChildren<Body>().MakeInactive();
             Champion.instance.GetComponentInChildren<Body>().OnDeselectChar();
             AttackTile();
         }

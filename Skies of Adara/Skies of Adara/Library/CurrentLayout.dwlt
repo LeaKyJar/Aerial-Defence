@@ -15,12 +15,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 8
     y: 51
-    width: 1264
-    height: 621
+    width: 1239
+    height: 628
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 950, y: 392}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -37,18 +37,18 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 300
-    width: 229
-    height: 271
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+    y: 295
+    width: 359
+    height: 283
+  m_MinSize: {x: 232, y: 271}
+  m_MaxSize: {x: 10002, y: 10021}
   m_ActualView: {fileID: 16}
   m_Panes:
+  - {fileID: 14}
   - {fileID: 16}
-  - {fileID: 18}
-  - {fileID: 15}
-  m_Selected: 0
-  m_LastSelected: 1
+  - {fileID: 13}
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -67,12 +67,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 229
-    height: 571
-  m_MinSize: {x: 202, y: 342}
-  m_MaxSize: {x: 4002, y: 8042}
+    width: 359
+    height: 578
+  m_MinSize: {x: 232, y: 471}
+  m_MaxSize: {x: 10002, y: 14021}
   vertical: 1
-  controlID: 84
+  controlID: 72
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -89,13 +89,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 229
-    height: 300
+    width: 359
+    height: 295
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 21}
+  m_ActualView: {fileID: 19}
   m_Panes:
-  - {fileID: 21}
+  - {fileID: 19}
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &5
@@ -112,15 +112,15 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 429
+    x: 563
     y: 0
-    width: 558
-    height: 571
+    width: 399
+    height: 578
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 19}
+  m_ActualView: {fileID: 17}
   m_Panes:
-  - {fileID: 19}
+  - {fileID: 17}
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &6
@@ -142,8 +142,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1264
-    height: 621
+    width: 1239
+    height: 628
   m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &7
@@ -162,7 +162,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1264
+    width: 1239
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -187,12 +187,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 1264
-    height: 571
-  m_MinSize: {x: 879, y: 342}
-  m_MaxSize: {x: 16004, y: 8042}
+    width: 1239
+    height: 578
+  m_MinSize: {x: 913, y: 471}
+  m_MaxSize: {x: 22008, y: 14021}
   vertical: 0
-  controlID: 161
+  controlID: 125
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -208,8 +208,8 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 601
-    width: 1264
+    y: 608
+    width: 1239
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -227,15 +227,15 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 229
+    x: 359
     y: 0
-    width: 200
-    height: 571
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 20}
+    width: 204
+    height: 578
+  m_MinSize: {x: 204, y: 221}
+  m_MaxSize: {x: 4004, y: 4021}
+  m_ActualView: {fileID: 18}
   m_Panes:
-  - {fileID: 20}
+  - {fileID: 18}
   m_Selected: 0
   m_LastSelected: 0
 --- !u!114 &11
@@ -252,400 +252,19 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 987
+    x: 962
     y: 0
     width: 277
-    height: 571
+    height: 578
   m_MinSize: {x: 275, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 14}
+  m_ActualView: {fileID: 12}
   m_Panes:
-  - {fileID: 13}
-  - {fileID: 17}
-  - {fileID: 14}
+  - {fileID: 15}
   - {fileID: 12}
-  m_Selected: 2
-  m_LastSelected: 3
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12158, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AutoRepaintOnSceneChange: 0
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Collab History
-    m_Image: {fileID: 0}
-    m_Tooltip: 
-  m_DepthBufferBits: 0
-  m_Pos:
-    serializedVersion: 2
-    x: 639
-    y: 100
-    width: 633
-    height: 550
-  m_PersistentViewDataDictionary: {fileID: 0}
-  m_InitialOpenURL: file:///C:/Users/Lim Ken Jyi/AppData/Roaming/Unity/Packages/node_modules/unityeditor-collab-history/dist/index.html
-  m_GlobalObjectTypeName: 
-  m_RegisteredViewURLs:
-  - file:///C:/Users/Lim Ken Jyi/AppData/Roaming/Unity/Packages/node_modules/unityeditor-collab-history/dist/index.html
-  m_RegisteredViewInstances:
-  - {fileID: 0}
---- !u!114 &13
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 13401, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AutoRepaintOnSceneChange: 0
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Test Runner
-    m_Image: {fileID: 0}
-    m_Tooltip: 
-  m_DepthBufferBits: 0
-  m_Pos:
-    serializedVersion: 2
-    x: 981
-    y: 100
-    width: 291
-    height: 550
-  m_PersistentViewDataDictionary: {fileID: 0}
-  m_TestTypeToolbarIndex: 0
-  m_PlayModeTestListGUI:
-    m_Window: {fileID: 13}
-    newResultList:
-    - id: '[Skies of Adara][suite]'
-      name: Skies of Adara
-      fullName: Skies of Adara
-      resultStatus: 1
-      duration: 30.940144
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-    - id: '[C:/Users/Lim Ken Jyi/Documents/ESC Project/Skies of Adara/Skies of Adara/Library/ScriptAssemblies/Assembly-CSharp.dll][suite]'
-      name: Assembly-CSharp.dll
-      fullName: C:/Users/Lim Ken Jyi/Documents/ESC Project/Skies of Adara/Skies of
-        Adara/Library/ScriptAssemblies/Assembly-CSharp.dll
-      resultStatus: 1
-      duration: 30.870075
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-    - id: '[Assembly-CSharp][NewPlayModeTest][suite]'
-      name: NewPlayModeTest
-      fullName: NewPlayModeTest
-      resultStatus: 1
-      duration: 30.828917
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test1LoadScene1]'
-      name: Test1LoadScene1
-      fullName: NewPlayModeTest.Test1LoadScene1
-      resultStatus: 1
-      duration: 1.5719635
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test2_1SnaptoDefaultChampion]'
-      name: Test2_1SnaptoDefaultChampion
-      fullName: NewPlayModeTest.Test2_1SnaptoDefaultChampion
-      resultStatus: 1
-      duration: 2.6998382
-      messages: 
-      output: "(917.6, 917.6, 0.0)\r\n"
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test2_2SnaptoGridChampion]'
-      name: Test2_2SnaptoGridChampion
-      fullName: NewPlayModeTest.Test2_2SnaptoGridChampion
-      resultStatus: 1
-      duration: 2.700475
-      messages: 
-      output: "14\r\nChampion: 14\r\n9\r\nChampion: 9\r\n13\r\nChampion: 13\r\n18\r\nChampion:
-        18\r\n17\r\nChampion: 17\r\n12\r\nChampion: 12\r\n16\r\nChampion: 16\r\n21\r\nChampion:
-        21\r\n20\r\nChampion: 20\r\n15\r\nChampion: 15\r\n(917.6, 917.6, 0.0)\r\n15\r\n"
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test2_3DeployChampionBody]'
-      name: Test2_3DeployChampionBody
-      fullName: NewPlayModeTest.Test2_3DeployChampionBody
-      resultStatus: 1
-      duration: 2.055097
-      messages: 
-      output: "Champion\r\nChampion\r\nChampion\r\nChampion\r\nChampion\r\nChampion\r\nChampion\r\nChampion\r\nChampion\r\nChampion\r\nChampion\r\nObject
-        Set: 10\r\nChampionBody: 10\r\n"
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test3_1SnaptoDefaultDefender]'
-      name: Test3_1SnaptoDefaultDefender
-      fullName: NewPlayModeTest.Test3_1SnaptoDefaultDefender
-      resultStatus: 1
-      duration: 2.7045512
-      messages: 
-      output: "(917.6, 917.6, 0.0)\r\n"
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test3_2SnaptoGridDefender]'
-      name: Test3_2SnaptoGridDefender
-      fullName: NewPlayModeTest.Test3_2SnaptoGridDefender
-      resultStatus: 1
-      duration: 2.7004828
-      messages: 
-      output: "9\r\nDefender: 9\r\n14\r\nDefender: 14\r\n13\r\nDefender: 13\r\n18\r\nDefender:
-        18\r\n12\r\nDefender: 12\r\n17\r\nDefender: 17\r\n16\r\nDefender: 16\r\n21\r\nDefender:
-        21\r\n20\r\nDefender: 20\r\n15\r\nDefender\r\nChampion\r\n(917.6, 917.6, 0.0)\r\n"
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test3_3DeployDefenderShield]'
-      name: Test3_3DeployDefenderShield
-      fullName: NewPlayModeTest.Test3_3DeployDefenderShield
-      resultStatus: 1
-      duration: 2.0452654
-      messages: 
-      output: "satisfies DeployDef\r\nreaches InstantiateShield()\r\nShield: 0\r\n"
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test4_1SnaptoDefaultEngineer]'
-      name: Test4_1SnaptoDefaultEngineer
-      fullName: NewPlayModeTest.Test4_1SnaptoDefaultEngineer
-      resultStatus: 1
-      duration: 2.7118907
-      messages: 
-      output: "False\r\n(917.6, 917.6, 0.0)\r\n"
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test4_2SnaptoGridEngineer]'
-      name: Test4_2SnaptoGridEngineer
-      fullName: NewPlayModeTest.Test4_2SnaptoGridEngineer
-      resultStatus: 1
-      duration: 2.6900375
-      messages: 
-      output: "9\r\nEngineer: 9\r\n14\r\nEngineer: 14\r\n13\r\nEngineer: 13\r\n18\r\nEngineer:
-        18\r\n12\r\nEngineer: 12\r\n17\r\nEngineer: 17\r\n16\r\nEngineer: 16\r\n21\r\nEngineer:
-        21\r\n20\r\n15\r\nEngineer\r\nChampion\r\nDefender\r\nEngineer\r\nFalse\r\n(917.6,
-        917.6, 0.0)\r\n21\r\n"
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test4_3DeployEngineerBody]'
-      name: Test4_3DeployEngineerBody
-      fullName: NewPlayModeTest.Test4_3DeployEngineerBody
-      resultStatus: 1
-      duration: 2.0465338
-      messages: 
-      output: "Engineer\r\nEngineer\r\nEngineer\r\nEngineer\r\nEngineer\r\nEngineer\r\nEngineer\r\nEngineer\r\nEngineer\r\nEngineer\r\nEngineer\r\nEngineer\r\nEngineer\r\nEngineer\r\nEngineer\r\nObject
-        Set: 16\r\nEngineerBody: 16\r\n"
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test5_1SnaptoDefaultBomber]'
-      name: Test5_1SnaptoDefaultBomber
-      fullName: NewPlayModeTest.Test5_1SnaptoDefaultBomber
-      resultStatus: 1
-      duration: 2.6924937
-      messages: 
-      output: "(917.6, 917.6, 0.0)\r\n"
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test5_2SnaptoGridBomber]'
-      name: Test5_2SnaptoGridBomber
-      fullName: NewPlayModeTest.Test5_2SnaptoGridBomber
-      resultStatus: 1
-      duration: 2.7134728
-      messages: 
-      output: "9\r\nBomber: 9\r\n14\r\nBomber: 14\r\n13\r\nBomber: 13\r\n18\r\nBomber:
-        18\r\n12\r\nBomber: 12\r\n17\r\nBomber: 17\r\nEngineerBody\r\n16\r\nEngineer\r\nBomber\r\n21\r\n20\r\n15\r\nBomber\r\nChampion\r\nDefender\r\nBomber\r\n(917.6,
-        917.6, 0.0)\r\n17\r\n"
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test6_1StartGameasSecond]'
-      name: Test6_1StartGameasSecond
-      fullName: NewPlayModeTest.Test6_1StartGameasSecond
-      resultStatus: 1
-      duration: 1.0441455
-      messages: 
-      output: "exitPrep\r\ndef phase\r\n"
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test6_2DefenderShieldHit]'
-      name: Test6_2DefenderShieldHit
-      fullName: NewPlayModeTest.Test6_2DefenderShieldHit
-      resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    - id: '[Assembly-CSharp][NewPlayModeTest.Test6_3EnemyFeedbackTile0]'
-      name: Test6_3EnemyFeedbackTile0
-      fullName: NewPlayModeTest.Test6_3EnemyFeedbackTile0
-      resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-    m_ResultText: "Test6_3DefenderShieldHit (0.054s)\n---\nUnhandled log message:
-      '[Exception] NullReferenceException: Object reference not set to an instance
-      of an object'. Use UnityEngine.TestTools.LogAssert.Expect\n---\nGameManager+<TileHitNum>c__Iterator2.MoveNext
-      () (at Assets/Script/BattleScene/GameManager.cs:310)\r\nUnityEngine.SetupCoroutine.InvokeMoveNext
-      (IEnumerator enumerator, IntPtr returnValueAddress) (at C:/buildslave/unity/build/Runtime/Export/Coroutines.cs:17)\r\nUnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)\r\nGameManager:TileHit(String)
-      (at Assets/Script/BattleScene/GameManager.cs:300)\r\n<Test6_3DefenderShieldHit>c__IteratorD:MoveNext()
-      (at Assets/Script/Testing/NewPlayModeTest.cs:240)\r\nUnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator,
-      IntPtr)\n---\nNullReferenceException: Object reference not set to an instance
-      of an object"
-    m_ResultStacktrace: "GameManager+<TileHitNum>c__Iterator2.MoveNext () (at Assets/Script/BattleScene/GameManager.cs:310)\r\nUnityEngine.SetupCoroutine.InvokeMoveNext
-      (IEnumerator enumerator, IntPtr returnValueAddress) (at C:/buildslave/unity/build/Runtime/Export/Coroutines.cs:17)\r\nUnityEngine.MonoBehaviour:StartCoroutine(IEnumerator)\r\nGameManager:TileHit(String)
-      (at Assets/Script/BattleScene/GameManager.cs:300)\r\n<Test6_3DefenderShieldHit>c__IteratorD:MoveNext()
-      (at Assets/Script/Testing/NewPlayModeTest.cs:240)\r\nUnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator,
-      IntPtr)\r\n\r\n"
-    m_TestListState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 18ee74b6
-      m_LastClickedID: -1233850856
-      m_ExpandedIDs: fb06408fe37725e808f83165ffffff7f
-      m_RenameOverlay:
-        m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
-        m_EditFieldRect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        m_UserData: 0
-        m_IsWaitingForDelay: 0
-        m_IsRenaming: 0
-        m_OriginalEventType: 11
-        m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 0}
-      m_SearchString: 
-    m_TestRunnerUIFilter:
-      PassedHidden: 0
-      FailedHidden: 0
-      NotRunHidden: 0
-      m_SearchString: 
-      selectedCategoryMask: 0
-      availableCategories: []
-  m_EditModeTestListGUI:
-    m_Window: {fileID: 13}
-    newResultList:
-    - id: '[Skies of Adara][suite]'
-      name: Skies of Adara
-      fullName: Skies of Adara
-      resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-    m_ResultText: 
-    m_ResultStacktrace: 
-    m_TestListState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: ffffff7f
-      m_RenameOverlay:
-        m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
-        m_EditFieldRect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        m_UserData: 0
-        m_IsWaitingForDelay: 0
-        m_IsRenaming: 0
-        m_OriginalEventType: 11
-        m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 0}
-      m_SearchString: 
-    m_TestRunnerUIFilter:
-      PassedHidden: 0
-      FailedHidden: 0
-      NotRunHidden: 0
-      m_SearchString: 
-      selectedCategoryMask: 0
-      availableCategories: []
---- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -666,12 +285,12 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 989
-    y: 19
+    x: 972
+    y: 100
     width: 275
-    height: 550
+    height: 557
   m_PersistentViewDataDictionary: {fileID: 0}
-  m_InitialOpenURL: https://public-cdn.cloud.unity3d.com/editor/production/cloud/collab
+  m_InitialOpenURL: https://public-cdn.cloud.unity3d.com/editor/production/cloud/hub
   m_GlobalObjectTypeName: 
   m_RegisteredViewURLs:
   - https://public-cdn.cloud.unity3d.com/editor/production/cloud/hub
@@ -679,7 +298,7 @@ MonoBehaviour:
   m_RegisteredViewInstances:
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &15
+--- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -703,12 +322,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 8
     y: 400
-    width: 198
+    width: 211
     height: 250
   m_PersistentViewDataDictionary: {fileID: 0}
   m_AnimEditor: {fileID: 0}
   m_Locked: 0
---- !u!114 &16
+--- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -730,12 +349,12 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 319
-    width: 227
-    height: 250
+    x: 8
+    y: 395
+    width: 357
+    height: 262
   m_PersistentViewDataDictionary: {fileID: 0}
---- !u!114 &17
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -757,10 +376,10 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 981
+    x: 972
     y: 100
-    width: 291
-    height: 550
+    width: 275
+    height: 557
   m_PersistentViewDataDictionary: {fileID: 0}
   m_ScrollPosition: {x: 0, y: 0}
   m_InspectorMode: 0
@@ -769,7 +388,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
---- !u!114 &18
+--- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -792,9 +411,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 8
-    y: 400
-    width: 330
-    height: 250
+    y: 395
+    width: 357
+    height: 262
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SearchFilter:
     m_NameFilter: 
@@ -810,18 +429,18 @@ MonoBehaviour:
     m_Folders:
     - Assets
   m_ViewMode: 1
-  m_StartGridSize: 61
+  m_StartGridSize: 68
   m_LastFolders:
   - Assets
-  m_LastFoldersGridSize: 61
+  m_LastFoldersGridSize: 68
   m_LastProjectPath: C:\Users\Lim Ken Jyi\Documents\ESC Project\Skies of Adara\Skies
     of Adara
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: 52290000
-    m_LastClickedID: 10578
-    m_ExpandedIDs: 0000000052290000a62a0000b62a0000662b00000a2c0000
+    m_SelectedIDs: 76290000
+    m_LastClickedID: 10614
+    m_ExpandedIDs: 0000000076290000282a0000002b00001a2b0000e22b0000a02c000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -849,7 +468,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000052290000a62a0000b62a0000662b00000a2c0000
+    m_ExpandedIDs: 0000000076290000282a0000002b00001a2b0000e22b0000a02c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -901,10 +520,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
-    m_GridSize: 61
-  m_DirectoriesAreaWidth: 78
---- !u!114 &19
+    m_ScrollPosition: {x: 0, y: 281}
+    m_GridSize: 68
+  m_DirectoriesAreaWidth: 182
+--- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -926,10 +545,10 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
-    x: 439
+    x: 573
     y: 100
-    width: 554
-    height: 550
+    width: 395
+    height: 557
   m_PersistentViewDataDictionary: {fileID: 0}
   m_MaximizeOnPlay: 0
   m_Gizmos: 0
@@ -959,29 +578,29 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 17
-      width: 554
-      height: 533
-    m_Scale: {x: 0.27760416, y: 0.27760416}
-    m_Translation: {x: 277, y: 266.5}
+      width: 395
+      height: 540
+    m_Scale: {x: 0.28125, y: 0.28125}
+    m_Translation: {x: 197.5, y: 270}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -997.82367
+      x: -702.2222
       y: -960
-      width: 1995.6473
+      width: 1404.4445
       height: 1920
     m_MinimalGUI: 1
-  m_defaultScale: 0.27760416
+  m_defaultScale: 0.28125
   m_TargetTexture: {fileID: 0}
   m_CurrentColorSpace: 0
-  m_LastWindowPixelSize: {x: 554, y: 550}
+  m_LastWindowPixelSize: {x: 395, y: 557}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000100000100
---- !u!114 &20
+--- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -1003,20 +622,20 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
-    x: 231
-    y: 19
-    width: 196
-    height: 550
+    x: 369
+    y: 100
+    width: 200
+    height: 557
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 4337.8291678141395
+  lastFramingTime: 10493.150052892515
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 586.54083, y: 1228.5787, z: -67.90613}
+    m_Target: {x: 459.50497, y: 1003.20593, z: 20.97467}
     speed: 2
-    m_Value: {x: 586.54083, y: 1228.5787, z: -67.90613}
+    m_Value: {x: 459.50497, y: 1003.20593, z: 20.97467}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -1040,13 +659,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.08516835, y: -0.11125863, z: 0.00957057, w: -0.99008906}
+    m_Target: {x: -0.012190876, y: -0.13844627, z: 0.0017043399, w: -0.99029344}
     speed: 2
-    m_Value: {x: -0.08516835, y: -0.11125864, z: 0.00957057, w: -0.99008906}
+    m_Value: {x: -0.012190876, y: -0.13844627, z: 0.0017043399, w: -0.99029344}
   m_Size:
-    m_Target: 1440.5135
+    m_Target: 1054.2352
     speed: 2
-    m_Value: 1440.5135
+    m_Value: 1054.2352
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1058,7 +677,7 @@ MonoBehaviour:
   m_ReplacementString: 
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
---- !u!114 &21
+--- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_PrefabParentObject: {fileID: 0}
@@ -1080,35 +699,35 @@ MonoBehaviour:
   m_DepthBufferBits: 0
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 19
-    width: 227
-    height: 279
+    x: 8
+    y: 100
+    width: 357
+    height: 274
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: 9efbffff00000000
+    scrollPos: {x: 0, y: 63}
+    m_SelectedIDs: bae3faff
+    m_LastClickedID: -334918
+    m_ExpandedIDs: bae3faffc4ebfaff2ef4faff6ef7fafff804fbff7813fbffa617fbff62ecfbff68ecfbfff408fdff0411fdff702efdff54ecffffd6ecfffff8eeffff04effffffef6ffff9efbffff00000000803800004c3900008445000004460000ae46000020470000264700007a47000038510000b85100006a5200004c53000056530000d453000066560000e656000098570000ba5900003a5a0000745c0000565d0000605d0000de5d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: PlayerStat
+      m_OriginalName: PlayerStat
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 23946
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 4}
     m_SearchString: 
   m_ExpandedScenes:
-  - InitTestScene636584381743751991
+  - Menu
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting

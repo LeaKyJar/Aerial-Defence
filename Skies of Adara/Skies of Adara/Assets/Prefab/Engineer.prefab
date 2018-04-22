@@ -131,9 +131,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startPositionX: 115
   startPositionY: 710
-  deadImage: {fileID: 2800000, guid: a9ac4afeff70e6a46bc1dd63c4c741ac, type: 3}
-  liveImage: {fileID: 2800000, guid: dbce3a8278c6dfb4cb269c9220f215dc, type: 3}
-  healImage: {fileID: 2800000, guid: 7f34b3367122d6e44aebcdb82b98dd50, type: 3}
+  deadImage: {fileID: 2800000, guid: da1cce63c2a02da4c945d10d216aba09, type: 3}
+  liveImage: {fileID: 2800000, guid: 89a05fdc2c4906d4a8225b336dfce6e9, type: 3}
+  healImage: {fileID: 2800000, guid: 0e7d9415c9a47064ab4ca1d7925abc33, type: 3}
   BeingDragged: 0
 --- !u!114 &114393083452470908
 MonoBehaviour:
@@ -154,7 +154,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: dbce3a8278c6dfb4cb269c9220f215dc, type: 3}
+  m_Texture: {fileID: 2800000, guid: 89a05fdc2c4906d4a8225b336dfce6e9, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0

@@ -263,7 +263,7 @@
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Editor">
-      <HintPath>Assets/Firebase/FDataB/Editor/Firebase.Editor.dll</HintPath>
+      <HintPath>Assets/Firebase/Editor/Firebase.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.App">
       <HintPath>Assets/Firebase/FDataB/Plugins/Firebase.App.dll</HintPath>
@@ -289,17 +289,17 @@
     <Reference Include="Unity.Tasks">
       <HintPath>Assets/Parse/Plugins/Unity.Tasks.dll</HintPath>
     </Reference>
-    <Reference Include="Google.IOSResolver_v1.2.61.0">
-      <HintPath>Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.61.0.dll</HintPath>
+    <Reference Include="Google.IOSResolver_v1.2.64.0">
+      <HintPath>Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.64.0.dll</HintPath>
     </Reference>
-    <Reference Include="Google.JarResolver_v1.2.61.0">
-      <HintPath>Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.61.0.dll</HintPath>
+    <Reference Include="Google.JarResolver_v1.2.64.0">
+      <HintPath>Assets/PlayServicesResolver/Editor/Google.JarResolver_v1.2.64.0.dll</HintPath>
     </Reference>
     <Reference Include="Google.VersionHandler">
       <HintPath>Assets/PlayServicesResolver/Editor/Google.VersionHandler.dll</HintPath>
     </Reference>
-    <Reference Include="Google.VersionHandlerImpl_v1.2.61.0">
-      <HintPath>Assets/PlayServicesResolver/Editor/Google.VersionHandlerImpl_v1.2.61.0.dll</HintPath>
+    <Reference Include="Google.VersionHandlerImpl_v1.2.64.0">
+      <HintPath>Assets/PlayServicesResolver/Editor/Google.VersionHandlerImpl_v1.2.64.0.dll</HintPath>
     </Reference>
     <Reference Include="TextMeshPro-2017.3-1.0.56-Editor">
       <HintPath>Assets/TextMesh Pro/Plugins/Editor DLL/TextMeshPro-2017.3-1.0.56-Editor.dll</HintPath>
@@ -330,7 +330,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\alvin.cs" />
+    <Compile Include="Assets\AddNewPlayer.cs" />
+    <Compile Include="Assets\Firebase\DBRetriever.cs" />
+    <Compile Include="Assets\Firebase\PlaceHolderforPlayerStats.cs" />
+    <Compile Include="Assets\ReferenceForJSonStringParse.cs" />
     <Compile Include="Assets\Script\BattleScene\Character\Body.cs" />
     <Compile Include="Assets\Script\BattleScene\Character\Bomber.cs" />
     <Compile Include="Assets\Script\BattleScene\Character\Champion.cs" />
@@ -338,19 +341,28 @@
     <Compile Include="Assets\Script\BattleScene\Character\Defender.cs" />
     <Compile Include="Assets\Script\BattleScene\Character\Engineer.cs" />
     <Compile Include="Assets\Script\BattleScene\Character\Shield.cs" />
+    <Compile Include="Assets\Script\BattleScene\CharacterActiveIndicator.cs" />
+    <Compile Include="Assets\Script\BattleScene\EndGamePopUp.cs" />
     <Compile Include="Assets\Script\BattleScene\GameManager.cs" />
     <Compile Include="Assets\Script\BattleScene\GridManagement\EnemyTile.cs" />
     <Compile Include="Assets\Script\BattleScene\GridManagement\GridScript.cs" />
+    <Compile Include="Assets\Script\BattleScene\GridManagement\HitMiss.cs" />
+    <Compile Include="Assets\Script\BattleScene\GridManagement\MiniGrid.cs" />
     <Compile Include="Assets\Script\BattleScene\GridManagement\Tile.cs" />
     <Compile Include="Assets\Script\BattleScene\HitMissIndicator.cs" />
     <Compile Include="Assets\Script\BattleScene\PhaseIndicator.cs" />
+    <Compile Include="Assets\Script\BattleScene\Ships\Missile.cs" />
+    <Compile Include="Assets\Script\BattleScene\Ships\Ship.cs" />
     <Compile Include="Assets\Script\HomeScene\ActionBar.cs" />
     <Compile Include="Assets\Script\HomeScene\CountdownTimer.cs" />
     <Compile Include="Assets\Script\HomeScene\FadeCharacter.cs" />
     <Compile Include="Assets\Script\HomeScene\MainMenu.cs" />
     <Compile Include="Assets\Script\HomeScene\Timer.cs" />
     <Compile Include="Assets\Script\Networking\CustomNetworkManager.cs" />
+    <Compile Include="Assets\Script\Networking\FiveVariables.cs" />
     <Compile Include="Assets\Script\Networking\MessageHandler.cs" />
+    <Compile Include="Assets\Script\Networking\MyNameForEnemy.cs" />
+    <Compile Include="Assets\Script\Networking\SendPlayerGameHis.cs" />
     <Compile Include="Assets\Script\NewPlayModeTest.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
@@ -387,16 +399,17 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Firebase\FDataB\Editor\AppDependencies.xml" />
-    <None Include="Assets\Firebase\FDataB\Editor\AuthDependencies.xml" />
-    <None Include="Assets\Firebase\FDataB\Editor\FirebaseAuth_v4.4.3_manifest.txt" />
-    <None Include="Assets\Firebase\FDataB\Editor\FirebaseDatabase_v4.4.3_manifest.txt" />
+    <None Include="Assets\Firebase\Editor\AppDependencies.xml" />
+    <None Include="Assets\Firebase\Editor\AuthDependencies.xml" />
+    <None Include="Assets\Firebase\Editor\FirebaseAuth_v4.5.0_manifest.txt" />
+    <None Include="Assets\Firebase\Editor\FirebaseDatabase_v4.5.0_manifest.txt" />
     <None Include="Assets\Firebase\FDataB\Plugins\Http\link.xml" />
     <None Include="Assets\Firebase\FDataB\Plugins\link.xml" />
     <None Include="Assets\Firebase\FDataB\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
     <None Include="Assets\Firebase\FDataB\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
-    <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.61.0.txt" />
+    <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.64.0.txt" />
     <None Include="Assets\Plugins\Android\Firebase\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\Firebase\res\values\google-services.xml" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\LiberationSans - OFL.txt" />

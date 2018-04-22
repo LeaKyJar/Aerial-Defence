@@ -12,6 +12,11 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
 
+    public GameObject timer;
+    private float timeLeft;
+    public GameObject MiniGrid;
+    public GameObject missilePrefab;
+
     public GameObject ready;
     //public GameObject atkMenu;
     public GameObject endBtn;
@@ -26,6 +31,8 @@ public class GameManager : MonoBehaviour {
     public GameObject cloud1;
     public GameObject cloud2;
     private string previousEnemyTileName;
+    public GameObject EndGamePopUp;
+    public GameObject Blackout;
     Character[] charArray;
 
 
@@ -87,7 +94,8 @@ public class GameManager : MonoBehaviour {
             instance = this;
         } else if (instance != this)
         {
-            Destroy(gameObject);
+            Destroy(instance);
+            instance = this;
         }
 
         DontDestroyOnLoad(gameObject);
@@ -116,12 +124,29 @@ public class GameManager : MonoBehaviour {
         {
             EndTurn();
         }*/
+        if (!PreparationPhase)
+        {
+            timeLeft -= Time.deltaTime;
+            if (Math.Round(timeLeft) > 9)
+            {
+                timer.GetComponentInChildren<Text>().text = "00:" + Math.Round(timeLeft).ToString();
+            }
+            else if (Math.Round(timeLeft) <= 9)
+            {
+                timer.GetComponentInChildren<Text>().text = "00:0" + Math.Round(timeLeft).ToString();
+            }
+            if (timeLeft < 0 && atkPhase)
+            {
+                EndTurn();
+            }
+        }
         
 	}
 
     // Called when entering defence phase
     public void EndTurn ()
     {
+        instructions.SetActive(true);
         if (!preparationPhase) {
             MessageHandler.SendStringMessage("YourTurn");
         }
@@ -135,14 +160,16 @@ public class GameManager : MonoBehaviour {
         toggleBtn.GetComponent<Toggle>().interactable = false;
         foreach(Character character in charArray)
         {
-            character.Active = false;
+            character.MakeInactive();
         }
         SetInstructions("Standby for enemy attack!");
+        timeLeft = 59f;
     }
 
     // Called when entering attack phase
     public void StartTurn ()
     {
+        instructions.SetActive(true);
         phaseIndicator.gameObject.SetActive(true);
         phaseIndicator.IndicatePhaseCoroutine("Attack Phase");
         atkPhase = true;
@@ -151,16 +178,38 @@ public class GameManager : MonoBehaviour {
         endBtn.GetComponent<Button>().interactable = true;
         toggleBtn.GetComponent<Toggle>().interactable = true;
 
-        Character[] fullCharArray = { Champion.instance, Defender.instance, Bomber.instance, Engineer.instance,
+        Character[] fullCharArray = { Champion.instance, Bomber.instance, Engineer.instance, Defender.instance,
                 GameObject.Find("ChampionBody").GetComponent<Body>(), GameObject.Find("EngineerBody").GetComponent<Body>()};
+
+        int numberOfUndamaged = 0;
+
         foreach (Character character in fullCharArray)
         {
             if (!character.Dead)
             {
-                character.Active = true;
+                if (character != Engineer.instance &&
+                    character != GameObject.Find("EngineerBody").GetComponent<Body>() &&
+                    character != Defender.instance)
+                {
+                    character.MakeActive();
+                }
+                numberOfUndamaged += 1;
+                Debug.Log("no.Of Undamaged = " + numberOfUndamaged);
+            }
+        }
+        if (numberOfUndamaged<6)
+        {
+            if (!Engineer.instance.Dead && Engineer.instance.Heal>0)
+            {
+                Engineer.instance.MakeActive();
+            }
+            if (!GameObject.Find("EngineerBody").GetComponent<Body>().Dead && Engineer.instance.Heal > 0)
+            {
+                GameObject.Find("EngineerBody").GetComponent<Body>().MakeActive();
             }
         }
         SetInstructions("Click on a unit to see what it can do!");
+        timeLeft = 59f;
 
     }
 
@@ -190,6 +239,8 @@ public class GameManager : MonoBehaviour {
             EndTurn();
         }
         preparationPhase = false;
+
+        timer.SetActive(true);
 
         //toggleBtn.GetComponent<Toggle>().interactable = true;
 
@@ -238,10 +289,30 @@ public class GameManager : MonoBehaviour {
             {
                 shield.SetActive(true);
             }
-
+            EnableActiveIndicators();
         }
     }
-    
+
+    public void EnableActiveIndicators()
+    {
+        try
+        {
+            Champion.instance.ActiveIndicator.GetComponent<CharacterActiveIndicator>().EnableIndicators();
+        }catch (Exception ex)
+        {
+            Debug.Log(ex);
+        }
+        Character[] tempCharArray = { Champion.instance, Bomber.instance, Champion.instance.GetComponentInChildren<Body>(), Engineer.instance, Engineer.instance.GetComponentInChildren<Body>() };
+
+        foreach (Character character in tempCharArray)
+        {
+            if (character.Active && character.ActiveIndicator != null)
+            {
+                character.ActiveIndicator.GetComponent<RawImage>().enabled = true;
+            }
+        }
+    }
+
 
     //Declare attack on enemy
     public void EnemyTargeted(string enemyTileName)
@@ -292,12 +363,22 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(2);
         enemyGrid.SetActive(false);
         ReactivateUnits();
+
+        yield return new WaitForSeconds(1);
+
+        EnableActiveIndicators();
+
+        if (!Champion.instance.Active && !Bomber.instance.Active && !Engineer.instance.Active
+            && !Champion.instance.GetComponentInChildren<Body>().Active && !Engineer.instance.GetComponentInChildren<Body>().Active && AtkPhase)
+        {
+            EndTurn();
+        }
     }
 
     //Called when receiving enemy's attack coord
     public void TileHit(string tileName)
     {
-        StartCoroutine(TileHitNum(tileName));        
+        StartCoroutine(TileHitNum(tileName));
     }
 
     IEnumerator TileHitNum(string tileName)
@@ -321,7 +402,7 @@ public class GameManager : MonoBehaviour {
             for (int ii=0; ii<4; ii++)
             {
                 print(charArray[ii].name + ": " + charArray[ii].LastTileName);
-                if (charArray[ii].LastTileName.Equals(ownTile.ToString()) && !charArray[ii].Dead)
+                if (charArray[ii].LastTileName.Equals(ownTile.ToString()))
                 {
                     charArray[ii].TakeDamage();
                     break;
@@ -329,7 +410,7 @@ public class GameManager : MonoBehaviour {
                 }
                 else if (charArray[ii].name.Equals("Champion") || charArray[ii].name.Equals("Engineer"))
                 {
-                    if (charArray[ii].GetComponentInChildren<Body>().LastTileName.Equals(ownTile.ToString()) && !charArray[ii].GetComponentInChildren<Body>().Dead)
+                    if (charArray[ii].GetComponentInChildren<Body>().LastTileName.Equals(ownTile.ToString()))
                     {
                         charArray[ii].GetComponentInChildren<Body>().TakeDamage();
                         break;
@@ -338,6 +419,10 @@ public class GameManager : MonoBehaviour {
                 else if (ii == 3)
                 {
                     MessageHandler.SendStringMessage("Hit Received");
+                    instructions.SetActive(false);
+                    FireMissile(new Vector3(1500, 1535, 0));
+                    yield return new WaitForSeconds(2);
+                    instructions.SetActive(true);
                     break;
                 }
             }
@@ -348,7 +433,15 @@ public class GameManager : MonoBehaviour {
         LoseGame();
     }
 
-        public void EmptyEnemyTile()
+    public void FireMissile(Vector3 pos)
+    {
+        GameObject missile = Instantiate(missilePrefab, new Vector3(-400, 1700, 0), transform.rotation);
+        missile.transform.SetParent(GameObject.Find("CombatBG").transform, false);
+        missile.GetComponent<Missile>().DesignateOrigin(new Vector3 (-400, 1700, 0));
+        missile.GetComponent<Missile>().DesignateTarget(pos);
+    }
+
+    public void EmptyEnemyTile()
     {
         StartCoroutine(EnemyEmptyTileNum());
     }
@@ -356,33 +449,56 @@ public class GameManager : MonoBehaviour {
     IEnumerator EnemyEmptyTileNum()
     {
         enemyGrid.SetActive(true);
+        Debug.Log(GameManager.instance.previousEnemyTileName);
         GameObject enemyTile = GameObject.Find(previousEnemyTileName);
+        Debug.Log(enemyTile.GetComponent<EnemyTile>());
         enemyTile.GetComponent<EnemyTile>().DestroyTile();
         hitMissIndicator.SetActive(true);
         hitMissIndicator.GetComponent<HitMissIndicator>().IndicateMissCoroutine(enemyTile.transform.position);
         yield return new WaitForSeconds(2);
         enemyGrid.SetActive(false);
         ReactivateUnits();
+        yield return new WaitForSeconds(1);
+
+        EnableActiveIndicators();
+
+        if (!Champion.instance.Active && !Bomber.instance.Active && !Engineer.instance.Active 
+            && !Champion.instance.GetComponentInChildren<Body>().Active && !Engineer.instance.GetComponentInChildren<Body>().Active && AtkPhase)
+        {
+            EndTurn();
+        }
     }
 
     public void LoseGame()
     {
-        if(Champion.instance.Dead && Bomber.instance.Dead && Champion.instance.GetComponentInChildren<Body>().Dead)
+
+        if (Champion.instance.Dead && Bomber.instance.Dead && Champion.instance.GetComponentInChildren<Body>().Dead)
         {
-            phaseIndicator.gameObject.SetActive(true);
+            
+
+            phaseIndicator.gameObject.SetActive(true);          
             phaseIndicator.IndicatePhaseCoroutine("Defeat");
-            MessageHandler.SendStringMessage("Victory");
-            SceneManager.LoadScene("Scenes/Menu");
-            CustomNetworkManager cnm = GameObject.Find("NetworkManager").GetComponent<CustomNetworkManager>();
-            //cnm.StopMatchMaking();
+            MessageHandler.helper();
         }
     }
 
-    public void WinGame()
+    public void LoseScreen(String args)
     {
-        phaseIndicator.gameObject.SetActive(true);
-        phaseIndicator.IndicatePhaseCoroutine("Victory");
-        SceneManager.LoadScene("Scenes/Menu");
+        Blackout.SetActive(true);
+        EndGamePopUp.gameObject.SetActive(true);
+        EndGamePopUp.GetComponent<EndGamePopUp>().DefeatPopUp();
+        //GameObject.Find("EndGameText").GetComponent<Text>().text = args;
+        MiniGrid.GetComponent<MiniGrid>().MakeHitMissSummary(args);
+    }
+
+
+
+    public void WinScreen(String args)
+    {
+        Blackout.SetActive(true);
+        EndGamePopUp.gameObject.SetActive(true);
+        EndGamePopUp.GetComponent<EndGamePopUp>().VictoryPopUp();
+        MiniGrid.GetComponent<MiniGrid>().MakeHitMissSummary(args);
     }
 
     public void SetInstructions(String stringInput)
@@ -418,7 +534,7 @@ public class GameManager : MonoBehaviour {
         bomberPreparationPhase = true;
         SetInstructions("Like the Champion, the Bomber can attack." +
             " She does a little more than that though." +
-            " When she takes damage, she will attack the enemy tile corresponding to her position." +
+            "  When she takes damage, she will attack the enemy tile corresponding to her position." +
             " A true kamikaze warrior!");
         Bomber.instance.gameObject.SetActive(true);
     }
@@ -431,6 +547,24 @@ public class GameManager : MonoBehaviour {
         {
             ready.GetComponent<Button>().interactable = true;
         }
+    }
+    public String Evaluate()
+    {
+        String finalstr = "";
+        Character[] fullCharArray = { Champion.instance, Champion.instance.GetComponentInChildren<Body>() , Defender.instance , Engineer.instance,
+        Engineer.instance.GetComponentInChildren<Body>() , Bomber.instance};
+        foreach (Character a in fullCharArray)
+        {
+            finalstr += "" + a.Dead + ";";
+            finalstr += "" + a.LastTileID + ";";
+        }
+        return finalstr.Substring(0,finalstr.Length-1);
+    }
+
+    public void EndGame()
+    {
+        SceneManager.LoadScene("Scenes/Menu");
+        CustomNetworkManager.instance.StopMatchMaking();
     }
 
 }

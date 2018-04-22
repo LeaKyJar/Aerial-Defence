@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalTile: {fileID: 2800000, guid: 75aefc06fc2771d4a82b93a42032c11f, type: 3}
   selectedTile: {fileID: 2800000, guid: 6e749470d0011eb45974a9cc52b98242, type: 3}
-  brokenTile: {fileID: 2800000, guid: b9518f4caa328fe489a136111d862885, type: 3}
+  brokenTile: {fileID: 2800000, guid: dcc6d51a5910c41479289ad438025a86, type: 3}
 --- !u!222 &222458390368405674
 CanvasRenderer:
   m_ObjectHideFlags: 1
